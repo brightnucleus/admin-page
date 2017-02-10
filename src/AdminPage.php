@@ -112,7 +112,7 @@ class AdminPage {
 	 *
 	 * @since 0.1.0
 	 */
-	public function register(): void {
+	public function register() {
 		add_action( 'admin_menu', [ $this, 'register_page' ], 25 );
 	}
 
@@ -124,7 +124,7 @@ class AdminPage {
 	 * @throws InvalidArgumentException If the page addition function could not
 	 *                                  be invoked.
 	 */
-	public function register_page(): void {
+	public function register_page() {
 		$config = $this->validate_config( $this->getConfigArray() );
 
 		// Skip page creation if it already exists. This allows reuse of 1 page
