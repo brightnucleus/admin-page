@@ -105,7 +105,8 @@ class AdminPages extends ArrayCollection {
 	 * @since 0.1.0
 	 */
 	public function register_pages() {
-		array_walk( $this->getConfigArray(), [ $this, 'add_page' ] );
+		$pages = $this->getConfigArray();
+		array_walk( $pages, [ $this, 'add_page' ] );
 		foreach ( $this as $page ) {
 			/** @var AdminPage $page */
 			$page->register();
