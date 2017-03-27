@@ -249,7 +249,8 @@ class BaseForm implements Form {
 	 * @return bool Whether the current request is a submission.
 	 */
 	protected function is_submission(): bool {
-		return 'POST' === $_SERVER['REQUEST_METHOD'];
+		return 'POST' === $_SERVER['REQUEST_METHOD']
+		       && ! wp_doing_ajax();
 	}
 
 	/**

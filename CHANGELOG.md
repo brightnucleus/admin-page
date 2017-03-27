@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.4] - 2017-03-27
+### Fixed
+- Only process form submissions when not doing AJAX.
+
 ## [0.1.3] - 2017-03-27
 ### Changed
 - Don't include `composer.lock` file.
@@ -19,6 +23,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release to GitHub.
 
+[0.1.4]: https://github.com/brightnucleus/admin-page/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/brightnucleus/admin-page/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/brightnucleus/admin-page/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/brightnucleus/admin-page/compare/v0.1.0...v0.1.1
