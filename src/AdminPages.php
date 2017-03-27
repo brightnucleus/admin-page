@@ -95,7 +95,11 @@ class AdminPages extends ArrayCollection {
 	 * @since 0.1.0
 	 */
 	public function register() {
-		add_action( 'admin_menu', [ $this, 'register_pages' ], 20 );
+		if ( ! is_admin() ) {
+			return;
+		}
+
+		add_action( 'init', [ $this, 'register_pages' ], 20 );
 	}
 
 	/**

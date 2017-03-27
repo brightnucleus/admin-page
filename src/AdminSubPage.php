@@ -18,10 +18,10 @@ namespace BrightNucleus\AdminPage;
  *
  * A single WordPress backend page attached as a sub-page to another AdminPage.
  *
- * @since 0.1.0
+ * @since   0.1.0
  *
  * @package BrightNucleus\AdminPage
- * @author Alain Schlesser <alain.schlesser@gmail.com>
+ * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
 class AdminSubPage extends AdminPage {
 

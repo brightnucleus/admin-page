@@ -5,7 +5,7 @@
 [![Latest Unstable Version](https://img.shields.io/packagist/vpre/brightnucleus/admin-page.svg)](https://packagist.org/packages/brightnucleus/admin-page)
 [![License](https://img.shields.io/packagist/l/brightnucleus/admin-page.svg)](https://packagist.org/packages/brightnucleus/admin-page)
 
-Config-based WordPress admin pages using the Settings API. (WIP)
+Config-based WordPress admin pages. (WIP)
 
 ## Table Of Contents
 

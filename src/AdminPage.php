@@ -14,6 +14,8 @@
 namespace BrightNucleus\AdminPage;
 
 use BrightNucleus\AdminPage\Exception\MissingConfigKey;
+use BrightNucleus\AdminPage\Form\BaseForm;
+use BrightNucleus\AdminPage\Form\NullForm;
 use BrightNucleus\Config\ConfigInterface as Config;
 use BrightNucleus\Config\ConfigTrait;
 use BrightNucleus\Dependency\DependencyManager as Dependencies;
@@ -36,15 +38,18 @@ use Closure;
  */
 class AdminPage {
 
+	use FunctionInvokerTrait;
+	use ConfigTrait;
+
 	const CAPABILITY   = 'capability';
 	const DEPENDENCIES = 'dependencies';
 	const MENU_SLUG    = 'menu_slug';
 	const MENU_TITLE   = 'menu_title';
 	const PAGE_TITLE   = 'page_title';
 	const VIEW         = 'view';
-
-	use FunctionInvokerTrait;
-	use ConfigTrait;
+	const ICON_URL     = 'icon_url';
+	const POSITION     = 'position';
+	const FORM         = 'form';
 
 	/**
 	 * Hooks to the settings pages that have been registered.
@@ -63,6 +68,15 @@ class AdminPage {
 	 * @var OptionsStore
 	 */
 	protected $options;
+
+	/**
+	 * Form instance that is used to render a form.
+	 *
+	 * @since 0.1.2
+	 *
+	 * @var Form
+	 */
+	protected $form;
 
 	/**
 	 * Dependency Manager that manages enqueueing of dependencies.
@@ -94,17 +108,26 @@ class AdminPage {
 	 * @param Dependencies $dependencies Optional. Dependency manager that
 	 *                                   handles enqueueing.
 	 * @param ViewBuilder  $view_builder Optional. Custom view builder to use.
+	 * @param Form         $form         Optional. Form instance to use.
 	 */
 	public function __construct(
 		Config $config,
 		OptionsStore $options = null,
 		Dependencies $dependencies = null,
-		ViewBuilder $view_builder = null
+		ViewBuilder $view_builder = null,
+		Form $form = null
 	) {
 		$this->processConfig( $config );
 		$this->options      = $options;
 		$this->dependencies = $dependencies;
 		$this->view_builder = $view_builder ?? Views::getViewBuilder();
+		if ( null === $form && $this->hasConfigKey( AdminPage::FORM ) ) {
+			$form = new BaseForm(
+				$this->config->getSubConfig( AdminPage::FORM ),
+				$this->options
+			);
+		}
+		$this->form = $form ?? new NullForm();
 	}
 
 	/**
@@ -123,6 +146,7 @@ class AdminPage {
 	 *
 	 * @throws InvalidArgumentException If the page addition function could not
 	 *                                  be invoked.
+	 * @throws MissingConfigKey         If a required config key is missing.
 	 */
 	public function register_page() {
 		$config = $this->validate_config( $this->getConfigArray() );
@@ -152,8 +176,13 @@ class AdminPage {
 	protected function get_callback( array $config ) {
 		return function () use ( $config ) {
 			if ( array_key_exists( self::VIEW, $config ) ) {
+				//$this->process_options_submission( $this->options, $_POST );
+
 				$view = $this->view_builder->create( $config[ self::VIEW ] );
-				echo $view->render( [ 'options' => $this->options ] );
+				echo $view->render( [
+					'options' => $this->options,
+					'form'    => $this->form,
+				] );
 			}
 
 			if ( ! array_key_exists( self::DEPENDENCIES, $config ) ) {
@@ -226,7 +255,7 @@ class AdminPage {
 	 *
 	 * @param string $handle Handle of a dependency to enqueue.
 	 */
-	protected function enqueue_dependency( $handle ): void {
+	protected function enqueue_dependency( $handle ) {
 		if ( null === $this->dependencies ) {
 			return;
 		}
