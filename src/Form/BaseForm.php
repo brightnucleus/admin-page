@@ -250,7 +250,8 @@ class BaseForm implements Form {
 	 */
 	protected function is_submission(): bool {
 		return 'POST' === $_SERVER['REQUEST_METHOD']
-		       && ! wp_doing_ajax();
+		       && isset( $_POST['action'] )
+		       && $this->getConfigKey( Form::ACTION ) === $_POST['action'];
 	}
 
 	/**
