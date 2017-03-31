@@ -26,6 +26,17 @@ use BrightNucleus\AdminPage\Form;
 class NullForm implements Form {
 
 	/**
+	 * Get the identifier of the form.
+	 *
+	 * @since 0.1.5
+	 *
+	 * @return string Identifier of the form.
+	 */
+	public function get_id() {
+		return 0;
+	}
+
+	/**
 	 * Get the action identifier of the button.
 	 *
 	 * @since 0.1.2
