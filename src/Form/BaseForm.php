@@ -332,7 +332,7 @@ class BaseForm implements Form {
 	 *
 	 * @since 0.1.2
 	 *
-	 * @return bool Whether the curent request is secure.
+	 * @return bool Whether the current request is secure.
 	 */
 	protected function is_secure() {
 		return isset( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] === 'on';
