@@ -2,6 +2,10 @@
 All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+## [0.1.6] - 2017-08-14
+### Fixed
+- Attach process submission to WordPress' `init` hook.
+
 ## [0.1.5] - 2017-03-31
 ### Fixed
 - Add missing method in `NullForm`.
@@ -31,6 +35,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - Initial release to GitHub.
 
+[0.1.6]: https://github.com/brightnucleus/admin-page/compare/v0.1.5...v0.1.6
 [0.1.5]: https://github.com/brightnucleus/admin-page/compare/v0.1.4...v0.1.5
 [0.1.4]: https://github.com/brightnucleus/admin-page/compare/v0.1.3...v0.1.4
 [0.1.3]: https://github.com/brightnucleus/admin-page/compare/v0.1.2...v0.1.3

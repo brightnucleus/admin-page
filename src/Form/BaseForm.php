@@ -90,7 +90,7 @@ class BaseForm implements Form {
 		$this->processConfig( $config );
 		$this->options = $options;
 		if ( $this->is_submission() ) {
-			$this->process_submission();
+			add_action( 'init', [ $this, 'process_submission' ] );
 		}
 		$this->control_factory = $control_factory ?? new ControlFactory();
 	}
